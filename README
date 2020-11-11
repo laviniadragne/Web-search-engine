@@ -1,0 +1,132 @@
+Nume: Dragne Lavinia-Stefana
+Grupa: 314 CA
+
+	METODE NUMERICE
+	Tema #2
+
+Acesta este fisierul README corespunzator prezentarii implementarii rezolvarilor mele la tema 2.
+
+	Continutul proiectului este urmatorul:
+
+- Iterative.m, Prelucrare_Date.m contin codurile sursa corespunzatoare task-ului 1
+
+- Algebraic.m, PR_Inv.m, SST.m, Prelucrare_Date.m contin codurile sursa corespunzatoare
+task-ului 2
+
+- Apartenenta.m, PageRank.m, Find_Index.m, Print_Array.m, Sort_Descr.m contin codurile
+sursa corespunzatoare task-ului 3
+
+- acest fisier README.
+
+	Prezentarea solutiei:
+
+	Task 1
+
+	- Prelucrare_Date
+
+	Functia primeste, ca si parametru de intrare, numele fisierului, din care se extrag
+informatiile despre graf.
+	Se deschide fisierul si se memoreaza, in  variabila N, numarul de noduri, din graf.
+Se declara si initializeaza cu 0 matricile patratice (NxN) A si M.
+Vectorul vecini se initialiaza cu 1 si contine pe pozitia i numarul de noduri, cu care se
+invecineaza nodul i.
+	Se citesc de pe urmatoarele N linii datele. Variabila "nod" reprezinta numarul
+de ordine al nodului citit. In vectorul de vecini se citeste si memoreaza numarul
+de noduri, cu care se invecineaza "nod". 
+	Initializez variabila "ok", care va fi 1 daca exista legatura de la nod la el insusi
+si 0 in caz contrar.
+	Folosindu-ma de numarul de vecini, stocat in vectorul "vecini", citesc si memorez
+valoarea fiecarui nod, cu care se invecineaza nodul curent si verific daca nu este el insusi.
+In cazul acesta, schimb valoarea lui ok in 1. In caz contrar, initializez pozitia
+corespunzatoare din matricea A, de adiacenta, cu 1, semnificand ca pe pozitia (i,j)
+exista legatura de la i la j. In final, verific daca exista legatura intre nod si el insusi
+si in acest caz, scad numarul de noduri cu care se invecineaza, din vectorul "vecini".
+	Parcurg matricea de adiacenta A si daca gasesc o legatura de la nodul j la nodul i,
+calculez, cu formula din enunt, valoarea elementului de pe pozitia (i,j), din matricea M,
+ca fiind inversul numarului de vecini al nodului j.
+	Inchid fisierul primit ca si parametru si returnez valoarea matricei M si
+numarul N de noduri.
+
+	- Iterative
+
+	Functia apeleaza functia Prelucrare_Date, dandu-i ca si parametru de intrare
+numele fisierului din care se extrag datele.
+	Se initializeaza vectorul R_initial cu 0, iar vectorul R, ca avand elementele egale
+cu inversul numarului de noduri, N. Vectorul R_initial va reprezenta valoarea vectorului PR
+la momentul t, iar R la momentul (t + 1). 
+Se initializeaza vectorul "v_unu" ca fiind vectorul coloana, cu toate elementele 1.
+	Se foloseste relatia de recurenta din enunt si se impune conditia de oprire a
+iteratiilor: norma diferentei dintre vectorul R si R_initial sa fie mai mica decat o
+toleranta "eps", primita ca si parametru.
+	La fiecare iteratie, R_initial ia valoarea lui R si se calculeaza noul R,
+folosindu-se formula din enunt, pe baza parametrului primit d, a matricei M, a vectorului
+coloana "v_unu" si a numarului de noduri, N.
+	In final, se va retine valoarea R de la penultima iteratie.
+
+	Task-ul 2
+
+	- PR_Inv 
+	
+	Functia calculeaza inversa unei matrici A, folosind algoritmul Gram-Schmidt
+modificat. Aflu dimensiunile matricei A si pe baza lor initializez R matrice
+patratica si Q = A. In algoritmul de factorizare voi lucra cu cate o linie r din matricea R
+si cate o coloana q din Q. Dupa aflarea matricelor R si Q, rezolv N sisteme superior
+triunghiulare, folosind functia SST, pentru fiecare coloana a matricei B, rezultand
+coloanele matricei inverse.
+
+	- SST
+
+	Calculez separat elementul de pe ultima pozitie, iar apoi, pentru fiecare ecuatie 
+din sistem, ea avand coeficientii reprezentati pe fiecare linie din A, se calculeaza solutia
+si se memoreaza in vectorul y.
+
+
+	- Algebraic
+
+	Functia foloseste functia Prelucrare_Date, pentru crearea matricei M.
+	Se initializeaza vectorul coloana R, dar si vectorul coloana de 1 "v_unu".
+	Calculez, cu ajutorul functiei PR_Inv, inversa matricei (I - d * M) si pe baza ei
+si a formulei din anunt, calculez R.
+	
+	Task-ul 3
+
+	- Apartenenta
+	
+	Calculez valorile lui a si b. Stabilesc intervalul [val1, val2], daca acesta
+nu exista, adica daca val2 < val1. Stabilesc in care, din cele 3 intervale, se afla valoarea
+x si in functie de asta, calculez y = u(x).
+
+	- PageRank
+
+	Formez, prin concatenarea sintagmei ".out", la numele fisierului de intrare, numele
+fisierului de iesire. Deschid fisierul de iesire, pentru scriere si cel de intrare, pentru
+citire. Citesc datele din fisier, memorand numarul de noduri N si valorile val1 si val2,
+de pe ultimele 2 linii, citind linie cu linie si transformand valorile din string
+in double, cu functia str2double. Inchid fisierul de intrare. 
+	Scriu in fisierul de iesire numarul de noduri si las un rand liber dupa acesta.
+	Memorez, in vectorul R1, valoarea vectorului PR folosind primul algoritm. Cu
+ajutorul functiei Print_Array, scriu acest vector element cu element in fisierul de iesire,
+pe cate o linie. La fel si pentru vectorul R2, rezultat al functiei Algebraic.
+	Cu functia Sort_Descr sortez vectorul R2 descrescator si il memorez in PR2.
+	Pentru fiecare nod, in parte, scriu numarul acestuia de ordine in fisierul de
+iesire. Calculez cu functia Apartenenta, pe baza vectorului PR2 (sortat), a val1 si val2,
+valoarea lui u(PR2(i)) si o memorez in F.
+Cu ajutorul functiei Find_Index caut pe ce pozitie, din vectorul R2, se afla elementul curent
+al lui PR2. Scriu valoarea acestui index si a lui F in fisierul de iesire.
+	Inchid fisierul de iesire.
+
+	Surse:
+	SST: https://github.com/radusqrt/numerical-methods/blob/master/Ad-hoc/SST.m
+
+
+	Feedback:
+
+	Tema a fost una echilibrata, ce m-a ajutat sa aprofundez utilizarea limbajului
+Matlab/Octave, dar si algoritmi clasici precum SST si Gram-Schmidt. A fost o provocare,
+aborand un subiect interesant si practic, acela de functionare al unui motor de
+cautare, folosind un indice PageRank. Un minus al temei ar fi faptul ca a aparut
+fara checker si enuntul nu era foarte bine explicat si nici chiar complet.
+Multumim echipei ca ne-a stat la dispozitie cu intrebarile pe forum si ca a
+propus acest algoritm, pentru a fi implementat, la tema de casa. 
+
+
