@@ -119,14 +119,3 @@ al lui PR2. Scriu valoarea acestui index si a lui F in fisierul de iesire.
 	SST: https://github.com/radusqrt/numerical-methods/blob/master/Ad-hoc/SST.m
 
 
-	Feedback:
-
-	Tema a fost una echilibrata, ce m-a ajutat sa aprofundez utilizarea limbajului
-Matlab/Octave, dar si algoritmi clasici precum SST si Gram-Schmidt. A fost o provocare,
-aborand un subiect interesant si practic, acela de functionare al unui motor de
-cautare, folosind un indice PageRank. Un minus al temei ar fi faptul ca a aparut
-fara checker si enuntul nu era foarte bine explicat si nici chiar complet.
-Multumim echipei ca ne-a stat la dispozitie cu intrebarile pe forum si ca a
-propus acest algoritm, pentru a fi implementat, la tema de casa. 
-
-
